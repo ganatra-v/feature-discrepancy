@@ -33,3 +33,6 @@ if __name__ == "__main__":
         torch.manual_seed(i)
         result = train_model(args)
         feature_ranks[i+1] = result
+    
+    with open(os.path.join(args.output_dir, "feature_ranks.json"), "w") as f:
+        json.dump(feature_ranks, f)
