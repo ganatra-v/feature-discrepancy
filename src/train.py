@@ -29,8 +29,9 @@ def evaluate_performance(net, x_train, y_train, x_test, y_test):
 def calculate_shap_values(model, x_train, x_test):
     shap_explainer = shap.Explainer(model.infer, x_train)
     shap_values = shap_explainer(x_test)
-    feature_ranks = np.flip(np.argsort(np.abs(shap_values.values).mean(axis=0)))
-    return shap_values, feature_ranks
+    shap_values = np.abs(shap_values.values).mean(axis=0)
+    feature_ranks = np.flip(np.argsort(shap_values)).tolist()
+    return shap_values.tolist(), feature_ranks
 
 def train_model(args):
     # load dataset
