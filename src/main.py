@@ -32,6 +32,7 @@ if __name__ == "__main__":
     for i in range(args.num_experiments):
         torch.manual_seed(i)
         result = train_model(args)
+        result["seed"] = i
         feature_ranks[i+1] = result
     
     with open(os.path.join(args.output_dir, "feature_ranks.json"), "w") as f:

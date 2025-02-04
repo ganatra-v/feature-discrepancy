@@ -73,6 +73,5 @@ def train_model(args):
         "total_params" : total_params,
         "hidden_size" : args.hidden_size,
         "num_hidden_layers" : args.hidden_layers,
-        "seed" : args.seed,
         "shap_values" : shap_values
     }
