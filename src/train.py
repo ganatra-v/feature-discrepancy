@@ -62,7 +62,7 @@ def train_model(args):
             loss.backward()
             optimizer.step()
 
-    acc_train, acc_test = evaluate_performance(model, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor)
+    acc_train, acc_test = evaluate_performance(model, x_train_tensor, y_train, x_test_tensor, y_test)
     shap_values, feature_ranks = calculate_shap_values(model, x_train, x_test)
 
     return {

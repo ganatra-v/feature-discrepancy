@@ -25,7 +25,6 @@ class neural_network(nn.Module):
     self.sigmoid = nn.Sigmoid()
 
   def forward(self, x):
-    self.train()
     return self.layers(x)
 
   def infer(self, x):
