@@ -9,7 +9,14 @@ def load_two_moons(args):
 
 
 def load_noisy_two_moons(args):
-    pass
+    x, y = make_moons(n_samples = 5000, noise = 0.3, random_state= 42)
+    noisy_features = np.random.normal(0, 1, (x.shape[0], 5))
+    x = np.hstack([x, noisy_features])
+
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 42)
+    return x_train, y_train, x_test, y_test
+
+
 
 
 def load_sonar(args):
