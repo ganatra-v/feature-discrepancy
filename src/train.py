@@ -38,8 +38,10 @@ def train_model(args):
     traindataset = TensorDataset(torch.from_numpy(x_train).float(), torch.from_numpy(y_train).float())
     trainloader = DataLoader(traindataset, batch_size = args.batch_size, shuffle = True)
 
-    x_train = torch.from_numpy(x_train).float()
-    y_train = torch.from_numpy(y_train).float()
+    x_train_tensor = torch.from_numpy(x_train).float().cuda()
+    y_train_tensor = torch.from_numpy(y_train).float().cuda()
+    x_test_tensor = torch.from_numpy(x_test).float().cuda()
+    y_test_tensor = torch.from_numpy(y_test).float().cuda()
 
     # load model
     model = neural_network(args.num_features, args.hidden_layers, args.hidden_size, args.num_classes).cuda()
@@ -60,7 +62,7 @@ def train_model(args):
             loss.backward()
             optimizer.step()
 
-    acc_train, acc_test = evaluate_performance(model, x_train, y_train, x_test, y_test)
+    acc_train, acc_test = evaluate_performance(model, x_train_tensor, y_train_tensor, x_test_tensor, y_test_tensor)
     shap_values, feature_ranks = calculate_shap_values(model, x_train, x_test)
 
     return {
